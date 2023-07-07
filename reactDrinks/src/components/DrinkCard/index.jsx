@@ -1,6 +1,7 @@
 import { Col, Card, Button } from "react-bootstrap"
-import {useDrinks} from "../../hooks/useDrinks"
+
 import PropTypes from "prop-types"
+import { useDrinks } from "../../hooks/useDrinks";
 
 export default function DrinkCard({drink}){
 

@@ -7,13 +7,13 @@ const DrinksContext = createContext();
 
 const DrinksProvider = ({children}) =>{
     const [Drinks, setDrinks] = useState([]);
-    const [Modal, setModal] = useState(false);
+    const [modal, setModal] = useState(false);
     const [DrinkId, setDrinkId] = useState(null);
     const [Recipe, setRecipe] = useState({});
     const [Loading, setLoading] = useState(false);
     
     let handleModalClick = ()=>{
-        setModal(!Modal);
+        setModal(!modal);
     };
 
     let handleDrinkIdClick = (id)=>{
@@ -53,11 +53,12 @@ const DrinksProvider = ({children}) =>{
 
     const contextValues = {
         Drinks,
-        Modal,
+        modal,
         Recipe,
         Loading,
         handleModalClick,
-        handleDrinkIdClick
+        handleDrinkIdClick,
+        getDrink
     }
 
     return (
