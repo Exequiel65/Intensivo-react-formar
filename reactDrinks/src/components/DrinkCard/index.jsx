@@ -1,11 +1,15 @@
-import { Col, Card, Button } from "react-bootstrap"
+import { Col, Card, Button, Row } from "react-bootstrap"
 
 import PropTypes from "prop-types"
 import { useDrinks } from "../../hooks/useDrinks";
+import { useCart } from "../../hooks/useCart";
 
-export default function DrinkCard({drink}){
-
+export default function DrinkCard({ drink }) {
+    const { addToCart  } = useCart()
     const { handleModalClick, handleDrinkIdClick } = useDrinks();
+    function handleAddToCart(){
+        addToCart(drink)
+    }
     return (
         <Col md={6} lg={3}>
             <Card className="mb-4">
@@ -17,18 +21,32 @@ export default function DrinkCard({drink}){
 
                 <Card.Body>
                     <Card.Title>{drink.strDrink}</Card.Title>
-                    <Button
-                        variant="warning"
-                        className="w-100 text-uppercase mt-2"
-                        onClick={
-                            ()=>{
-                                handleModalClick();
-                                handleDrinkIdClick( drink.idDrink );
-                            }
-                        }
-                    >
-                        Ver Receta
-                    </Button>
+                    <Card.Subtitle style={{marginBottom: 5}}>${drink.price}</Card.Subtitle>
+                    <Row className="d-flex ">
+                        <Col >
+                            <Button
+                                variant="warning"
+                                className="text-uppercase"
+                                onClick={() => {
+                                    handleModalClick();
+                                    handleDrinkIdClick(drink.idDrink);
+                                }}
+                            >
+                                Ver Receta
+                            </Button>
+                        </Col>
+                        <Col >
+                            <Button
+                                variant="primary"
+                                className="text-uppercase"
+                                onClick={() => { 
+                                    handleAddToCart(drink)
+                                }}
+                            >
+                                Agregar al carrito
+                            </Button>
+                        </Col>
+                    </Row>
                 </Card.Body>
             </Card>
         </Col>
@@ -36,9 +54,10 @@ export default function DrinkCard({drink}){
 }
 
 DrinkCard.propTypes = {
-    drink : PropTypes.shape({
-        strDrinkThumb : PropTypes.string.isRequired,
-        strDrink : PropTypes.string.isRequired,
-        idDrink : PropTypes.string.isRequired
+    drink: PropTypes.shape({
+        strDrinkThumb: PropTypes.string.isRequired,
+        strDrink: PropTypes.string.isRequired,
+        idDrink: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired
     }).isRequired,
 }
