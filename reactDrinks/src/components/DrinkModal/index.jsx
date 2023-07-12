@@ -22,9 +22,6 @@ export default function DrinkDetailModal(){
 
         return ingredients
     }
-
-    console.log(modal)
-    console.log(!Loading)
     return (
 
         !Loading && (

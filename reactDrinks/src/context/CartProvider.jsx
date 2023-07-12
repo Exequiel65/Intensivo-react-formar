@@ -1,46 +1,20 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import PropTypes from "prop-types"
+import actionTypes from "../actions/cart.actions";
+import {cartInitialValues, cartReducer} from "../reducers/cart.reducer";
+
+
 const CartContext = createContext();
 
-const cartInitialValues = {
-    cartItems : [],
-}
 
-const actionTypes = {
-    ADD_TO_CART : "ADD_TO_CART",
-    REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART", 
-    REMOVE_ALL_FROM_CART : "REMOVE_ALL_FROM_CART", 
-    CLEAR_CART : "CLEAR_CART", 
-}
-
-function cartReducer (state, action){
-    const payload = action.payload
-    switch (action.type) {
-        case actionTypes.ADD_TO_CART:
-            return {
-                ...state,
-                cartItems : [...state.cartItems, payload]
-            }
-            
-        case actionTypes.REMOVE_ONE_FROM_CART:
-            
-            break;
-        case actionTypes.REMOVE_ALL_FROM_CART:
-            
-            break;
-        case actionTypes.CLEAR_CART:
-            
-            break;
-    
-        default:
-            break;
-    }
-
-}
 
 const CartProvider = ({children})=>{
 
     const [state, dispatch] = useReducer(cartReducer, cartInitialValues)
+
+    useEffect(() => {
+
+    }, []);
 
     const addToCart= ( drink )=>{
         dispatch(
@@ -51,16 +25,34 @@ const CartProvider = ({children})=>{
         )
     }
 
-    const removeOneFromCart = ()=>{
-        
+    const removeOneFromCart = (idDrink)=>{
+        dispatch(
+            {
+                type : actionTypes.REMOVE_ONE_FROM_CART,
+                payload : {
+                    idDrink
+                }
+            }
+        )
     }
 
-    const removeAllFromCart = ()=>{
-
+    const removeAllFromCart = (idDrink)=>{
+        dispatch(
+            {
+                type : actionTypes.REMOVE_ALL_FROM_CART,
+                payload : {
+                    idDrink
+                }
+            }
+        )
     }
 
     const clearCart = ()=>{
-
+        dispatch(
+            {
+                type : actionTypes.CLEAR_CART,
+            }
+        )
     }
 
     let cartValues = {
