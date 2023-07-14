@@ -6,7 +6,7 @@ export const cartInitialValues = {
 
 export function cartReducer (state, action){
     const payload = action.payload
-    let drinkInCart = state.cartItems.find((item) => item.idDrink  === payload.idDrink)
+    let drinkInCart = state.cartItems.find((item) => item.idDrink  === payload?.idDrink)
     
     switch (action.type) {
         case actionTypes.ADD_TO_CART:

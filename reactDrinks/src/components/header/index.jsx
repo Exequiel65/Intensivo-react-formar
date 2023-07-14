@@ -8,10 +8,10 @@ export default function Header() {
     return (
         <header className={`py-5 ${styles.header}`}>
             <h1>Buscador de Bebidas</h1>
-            <button onClick={toogleModal} style={{background: "none", border : "none" } }> 
-                <FontAwesomeIcon icon={faCartShopping}  />
+            {/* <button onClick={toogleModal} style={{background: "none", border : "none" } }>  */}
+                <FontAwesomeIcon onClick={toogleModal}  icon={faCartShopping}  />
 
-            </button>
+            {/* </button> */}
         </header>
     )
 }
